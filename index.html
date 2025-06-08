@@ -12,101 +12,146 @@
     body {
       margin: 0;
       font-family: "Segoe UI", "Noto Sans TC", sans-serif;
-      background-color: #f0f4f8;
+      height: 100vh;
+      overflow: hidden;
+      background-color: #eae6df;
+    }
+
+    .container {
       display: flex;
-      flex-direction: column;
       height: 100vh;
     }
 
-    header {
-      background: linear-gradient(to right, #6a11cb, #2575fc);
-      color: white;
-      padding: 1rem;
-      text-align: center;
-      font-size: 1.8rem;
-      font-weight: bold;
-    }
-
-    main {
-      display: flex;
-      flex: 1;
-      overflow: hidden;
-    }
-
+    /* Sidebar */
     .sidebar {
-      width: 280px;
-      background-color: #ffffff;
-      border-right: 1px solid #e5e7eb;
-      padding: 1rem;
-      overflow-y: auto;
-    }
-
-    .sidebar h2 {
-      font-size: 1.1rem;
-      margin-bottom: 1rem;
-      color: #111827;
-    }
-
-    .sidebar ul {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-    }
-
-    .sidebar li {
-      padding: 0.5rem 0;
-      border-bottom: 1px solid #e5e7eb;
-      color: #374151;
-      font-size: 0.95rem;
-    }
-
-    .content {
-      flex: 1;
+      width: 320px;
+      background-color: #fff;
+      border-right: 1px solid #ddd;
       display: flex;
       flex-direction: column;
-      align-items: center;
-      justify-content: start;
-      padding: 2rem;
-      background: linear-gradient(to bottom, #dff1ff, #ffffff);
-      position: relative;
+    }
+
+    .sidebar-header {
+      padding: 1rem;
+      font-weight: bold;
+      border-bottom: 1px solid #ddd;
+      background-color: #f0f2f5;
+    }
+
+    .chat-list {
+      flex: 1;
       overflow-y: auto;
     }
 
-    .hero {
-      background: url('https://www.transparenttextures.com/patterns/cartographer.png'), #cfe7ff;
-      border-radius: 20px;
+    .chat-item {
+      padding: 1rem;
+      border-bottom: 1px solid #f0f0f0;
+      cursor: pointer;
+    }
+
+    .chat-item:hover {
+      background-color: #f5f5f5;
+    }
+
+    /* Chat area */
+    .chat-area {
+      flex: 1;
+      background: url('https://web.whatsapp.com/img/bg-chat-tile_aa7fd39e1d295289e2b59f9419c6d087.png');
+      background-color: #efeae2;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .chat-header {
+      background-color: #f0f2f5;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      padding: 0 1rem;
+      font-weight: bold;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .chat-messages {
+      flex: 1;
       padding: 2rem;
-      width: 100%;
-      max-width: 800px;
-      text-align: center;
-      margin-bottom: 2rem;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
     }
 
-    .hero h2 {
-      font-size: 1.5rem;
-      color: #0f172a;
+    .message {
+      max-width: 60%;
       margin-bottom: 1rem;
+      padding: 0.75rem 1rem;
+      border-radius: 8px;
+      position: relative;
+      font-size: 0.95rem;
+      line-height: 1.4;
+      word-wrap: break-word;
     }
 
-    .hero p {
-      font-size: 1rem;
-      color: #334155;
+    .received {
+      background-color: #ffffff;
+      align-self: flex-start;
     }
 
-    .illustration {
+    .sent {
+      background-color: #dcf8c6;
+      align-self: flex-end;
+    }
+
+    .time {
+      font-size: 0.75rem;
+      color: #999;
+      text-align: right;
+      margin-top: 0.3rem;
+    }
+
+    .ai-widget {
       width: 100%;
-      max-width: 300px;
+      max-width: 600px;
+      height: 400px;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.1);
       margin: 1rem auto;
+      background-color: #fff;
     }
 
     elevenlabs-convai {
       width: 100%;
-      max-width: 700px;
-      height: 600px;
+      height: 100%;
+      border: none;
       display: block;
-      border-radius: 12px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+
+    .chat-input {
+      height: 60px;
+      background-color: #f0f2f5;
+      display: flex;
+      align-items: center;
+      padding: 0 1rem;
+      border-top: 1px solid #ddd;
+    }
+
+    .chat-input input {
+      flex: 1;
+      height: 40px;
+      border: none;
+      border-radius: 20px;
+      padding: 0 1rem;
+      font-size: 1rem;
+      outline: none;
+    }
+
+    .chat-input button {
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      color: #075e54;
+      margin-left: 0.5rem;
+      cursor: pointer;
     }
 
     @media (max-width: 768px) {
@@ -114,66 +159,70 @@
         display: none;
       }
 
-      .hero {
-        padding: 1.5rem;
+      .chat-messages {
+        padding: 1rem;
       }
 
-      elevenlabs-convai {
-        height: 500px;
+      .ai-widget {
+        height: 300px;
       }
     }
   </style>
 </head>
 <body>
-  <header>你的社交訓練導師</header>
-
-  <main>
+  <div class="container">
+    <!-- Sidebar -->
     <aside class="sidebar">
-      <h2>訓練主題</h2>
-      <ul>
-        <li>靈活變通有辦法</li>
-        <li>目標明確、靈活行動</li>
-        <li>靈活變通策略：如何照顧心情?</li>
-        <li>靈活變通策略 - 我應該失望多久？</li>
-        <li>靈活變通策略 - 這行動令我更接近自己所重視的事嗎？</li>
-        <li>立好印象</li>
-        <li>期望行為</li>
-        <li>解讀對方信息</li>
-        <li>合適的衣著打扮</li>
-        <li>分享小食(行為舉止)</li>
-        <li>雙向溝通1：溝通要認真</li>
-        <li>溝通時的身體語言（眼耳口到）</li>
-        <li>留意話題，展現興趣</li>
-        <li>不做訪問員</li>
-        <li>不霸住說話</li>
-        <li>不重覆話題</li>
-        <li>不取笑及指點別人</li>
-        <li>避免問私人問題</li>
-        <li>電子通訊溝通 - 交換聯絡</li>
-        <li>電子通訊溝通 - 開展電話交談</li>
-        <li>結束電話談話</li>
-        <li>電子通訊四不</li>
-        <li>加入群組對話</li>
-        <li>加入後談相同話題</li>
-        <li>未能成功加入對話而要離開對話</li>
-        <li>開始時能加入對話，後來被拒絕而要離開對話</li>
-        <li>成功加入對話而要離開對話</li>
-        <li>正面回應別人提醒/評語</li>
-        <li>不互相嘲笑</li>
-      </ul>
+      <div class="sidebar-header">訓練主題清單</div>
+      <div class="chat-list">
+        <div class="chat-item">靈活變通有辦法</div>
+        <div class="chat-item">目標明確、靈活行動</div>
+        <div class="chat-item">如何照顧心情？</div>
+        <div class="chat-item">我應該失望多久？</div>
+        <div class="chat-item">這行動令我更接近自己所重視的事嗎？</div>
+        <div class="chat-item">立好印象</div>
+        <div class="chat-item">解讀對方信息</div>
+        <div class="chat-item">合適的衣著打扮</div>
+        <div class="chat-item">分享小食（行為舉止）</div>
+        <!-- Add more as needed -->
+      </div>
     </aside>
 
-    <section class="content">
-      <div class="hero">
-        <img src="https://cdn-icons-png.flaticon.com/512/201/201634.png" alt="friendly mascot" class="illustration" />
-        <h2>歡迎使用你的社交訓練導師</h2>
-        <p>透過語音 AI 練習社交技巧，提升自信與溝通能力！</p>
+    <!-- Chat Area -->
+    <div class="chat-area">
+      <div class="chat-header">你的社交訓練導師</div>
+
+      <div class="chat-messages">
+        <!-- Sample Messages -->
+        <div class="message received">
+          哈囉，我是你的社交訓練導師，要練習哪一個主題呢？
+          <div class="time">下午 2:30</div>
+        </div>
+
+        <div class="message sent">
+          我想學習怎樣自然地加入群組對話。
+          <div class="time">下午 2:31</div>
+        </div>
+
+        <!-- AI Widget -->
+        <div class="ai-widget">
+          <elevenlabs-convai agent-id="agent_01jx70y390em98782c0s5g4nq4"></elevenlabs-convai>
+        </div>
+
+        <div class="message received">
+          很棒！現在模擬一段對話情境吧 😊
+          <div class="time">下午 2:32</div>
+        </div>
       </div>
 
-      <elevenlabs-convai agent-id="agent_01jx70y390em98782c0s5g4nq4"></elevenlabs-convai>
-    </section>
-  </main>
+      <div class="chat-input">
+        <input type="text" placeholder="輸入訊息..." disabled />
+        <button title="語音輸入">🎤</button>
+      </div>
+    </div>
+  </div>
 
+  <!-- AI Widget Script -->
   <script 
     src="https://unpkg.com/@elevenlabs/convai-widget-embed" 
     async 
