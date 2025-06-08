@@ -8,7 +8,7 @@
     body {
       margin: 0;
       font-family: Arial, sans-serif;
-      background-color: #f3f4f6;
+      background-color: #f9fafb;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -19,20 +19,18 @@
     h1 {
       text-align: center;
       color: #111827;
-      margin: 1rem;
+      margin: 1.5rem;
     }
 
-    iframe {
+    elevenlabs-convai {
       width: 100%;
       max-width: 800px;
       height: 600px;
-      border: none;
-      border-radius: 10px;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      display: block;
     }
 
-    @media (max-width: 600px) {
-      iframe {
+    @media (max-width: 640px) {
+      elevenlabs-convai {
         height: 500px;
       }
     }
@@ -40,10 +38,15 @@
 </head>
 <body>
   <h1>Talk to Our AI Voice Agent</h1>
-  <iframe 
-    src="https://elevenlabs.io/app/talk-to?agent_id=agent_01jx70y390em98782c0s5g4nq4" 
-    allow="microphone"
-    title="AI Voice Chat Agent">
-  </iframe>
+
+  <!-- Embed the ElevenLabs AI Agent -->
+  <elevenlabs-convai agent-id="agent_01jx70y390em98782c0s5g4nq4"></elevenlabs-convai>
+
+  <!-- Load the ElevenLabs Widget Script -->
+  <script 
+    src="https://unpkg.com/@elevenlabs/convai-widget-embed" 
+    async 
+    type="text/javascript">
+  </script>
 </body>
 </html>
